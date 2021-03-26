@@ -1,7 +1,7 @@
 # Yeoman Generator - Cloud Terraform Scaffolding
 ## Overview
 
-This Yeoman generator creates Terraform project scaffolding a cloud project 
+This Yeoman generator creates Terraform backend storage (to store terraform remote state)
 
 ### Supported Cloud Providers
 - Azure
@@ -15,13 +15,13 @@ This Yeoman generator creates Terraform project scaffolding a cloud project
     - target cloud provider
     - target cloud provider region
     - environments to be supported
-        - choices include dev, prod, qa, sit, uat (dev and prod selected by default)
+        - choices include upper and lower (both selected by default)
     - common cloud resource tags
 
 #### Writing
 - Creates Cloud Backend Configuration Files (opinionated backend naming convention)
-- Creates Parameter Files
-- Creates Skeleton Terraform main.tf, variables.tf, and output.tf files
+- Creates PBackend arameter Files
+- Creates terraform templates files for terraform backends (Terraform main.tf, variables.tf, and output.tf files)
 
 #### Installing
 - initializes the local git repo (with either git or git flow)
@@ -38,48 +38,37 @@ This Yeoman generator creates Terraform project scaffolding a cloud project
 ### The resulting project will have the following structure:
 
 ```
-project
+backend_project
 └───backends
-|   |   dev-backend (default)
-|   |   dev-project-backend-key (default)
-|   |   prod-backend (default)
-|   |   prod-project-backend-key (default)
-|   |   qa-backend
-|   |   qa-project-backend-key
-|   |   sit-backend
-|   |   sit-project-backend-key
-|   |   uat-backend
-|   |   uat-project-backend-key
+|   |   lower-backend (default)
+|   |   lower-project-backend-key (default)
+|   |   upper-backend (default)
+|   |   upper-project-backend-key (default)
 └───parameters
-|   |   dev-project.tfvars (default)
-|   |   dev.tfvars (default)
-|   |   prod-project.tfvars (default)
-|   |   prod.tfvars (default)
-|   |   qa-project.tfvars 
-|   |   qa.tfvars
-|   |   sit-project.tfvars 
-|   |   sit.tfvars
-|   |   uat-project.tfvars 
-|   |   uat.tfvars
+|   |   lower-project.tfvars (default)
+|   |   lower.tfvars (default)
+|   |   upper-project.tfvars (default)
+|   |   upper.tfvars (default)
 └───scripts
 |   |   prep-tf-env.sh (optional)
 |   .gitignore
 |   .pre-commit-config.yaml (optional)
 |   atlantis.yaml (optional)
 |   main.tf
+|   outputs.tf
 |   README.md
 |   variables.tf
 ```
 
-**Note:** The "-backend-key" files contain the object name for the terraform state per environment.  It is in a separate backend config file in the event that you want to support the creation of multiple instances of the resources defined in main.tf in the same environment (but managed under different tfstate).  To do so, you would MANUALLY create additional -backend-key files with unique names.  You will also have to MANJUALLY modify your atlantis config to support these additional "projects"
+**Note:** The "-backend-key" files contain the object name for the terraform state per environment (upper - prod & uat, lower - sit, qa, dev).
 
 ## Usage
 
 <ol>
-<li> mkdir your_project_directory
-<li> cd your_project_directory
-<li> npm install -g generator-cloud-tf-cjc
-<li> yo cloud-tf-cjc
+<li> mkdir your_terraform_backend_project_directory
+<li> cd your_terraform_backend_project_directory
+<li> npm install -g generator-cloud-tf-backend-cjc
+<li> yo cloud-tf-backend-cjc
 </ol>
 
 ## Development
@@ -89,7 +78,7 @@ project
 
 - npm installed
 - Yeoman installed
-- Before the generated terraform project is initialized, backend storage must exist that matches the naming convention used in the backend config files
+- Before the generated terraform backend project templates are used, credentials for either AWS or Azure must be in place.
 
 ### Configurations
 
