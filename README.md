@@ -3,7 +3,7 @@
 
 This Yeoman generator creates Terraform backend storage (to store terraform remote state)
 
-![Project Image](./TerraformProjectScaffolding-Backend.png)
+![Project Image](https://github.com/cchrist1967/generator-cloud-tf-backend-cjc/TerraformProjectScaffolding-Backend.png)
 
 ### Supported Cloud Providers
 - Azure
