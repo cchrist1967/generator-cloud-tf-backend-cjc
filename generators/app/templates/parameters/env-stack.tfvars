@@ -1,0 +1,1 @@
+bucket      = "<%= client %>-<%= program %>-<%= backend_region %>-<%= backend_env %>-envs-tf-backend"
