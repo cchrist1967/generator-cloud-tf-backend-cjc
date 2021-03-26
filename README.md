@@ -20,7 +20,7 @@ This Yeoman generator creates Terraform backend storage (to store terraform remo
 
 #### Writing
 - Creates Cloud Backend Configuration Files (opinionated backend naming convention)
-- Creates PBackend arameter Files
+- Creates Backend Parameter Files
 - Creates terraform templates files for terraform backends (Terraform main.tf, variables.tf, and output.tf files)
 
 #### Installing
