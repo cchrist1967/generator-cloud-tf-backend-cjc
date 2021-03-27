@@ -1,2 +1,3 @@
 bucket  = "<%= client %>-<%= program %>-<%= backend_region %>-<%= backend_env %>-envs-tf-backend"
 region  = "<%= backend_region %>"
+dynamodb_table = "<%= backend_env %>-terraform-state-lock"

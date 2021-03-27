@@ -1,6 +1,6 @@
 # PROVIDERS
 provider "<%= cloud_provider %>" {
-  region = "<%= region %>"
+  region  = "<%= region %>"
   version = "~> <%= cloud_provider_version %>"
 }
 
@@ -26,7 +26,7 @@ resource "aws_kms_key" "backend_kms_key" {
 resource "aws_s3_bucket" "backend_bucket" {
   #cjc:skip=CKV_AWS_52:Allow bucket without MFA delete enabled for now
   #cjc:skip=CKV_AWS_18:Allow bucket without access logging enabled for now
-  bucket = var.bucket
+  bucket = "<%= client %>-<%= program %>-<%= region %>-${var.environment}-envs-tf-backend"
   acl    = "private"
 
   versioning {
@@ -55,4 +55,23 @@ resource "aws_s3_bucket_public_access_block" "bucket_access" {
   block_public_policy     = true
   ignore_public_acls      = true
   restrict_public_buckets = true
+}
+
+resource "aws_dynamodb_table" "state-lock-table" {
+  #cjc:skip=CKV_AWS_28:Allow Dynamodb to be created without point in time recovery (backup) enabled
+  name           = "${var.environment}-terraform-state-lock"
+  billing_mode   = "PROVISIONED"
+  read_capacity  = 20
+  write_capacity = 20
+  hash_key       = "LockID"
+
+  attribute {
+    name = "LockID"
+    type = "S"
+  }
+
+  tags = merge(var.common_tags, {
+    Tier        = "Meta",
+    Environment = var.environment
+  })
 }

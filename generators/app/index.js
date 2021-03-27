@@ -201,11 +201,11 @@ module.exports = class extends Generator {
     ]
 
     // ASK PROJECT QUESTIONS
-    this.log(`${chalk.cyan("PROJECT INFO:")}`)
+    this.log(`${chalk.cyan("\nPROJECT INFO:")}`)
     this.project_answers = await this.prompt(project_questions);
 
     // ASK CLOUD QUESTIONS
-    this.log(`${chalk.cyan("CLOUD PROVIDER")}`)
+    this.log(`${chalk.cyan("\nCLOUD PROVIDER")}`)
     this.cloud_answers = await this.prompt(cloud_questions);
     switch (this.cloud_answers.cloud) {
       case 'azurerm':
@@ -217,15 +217,15 @@ module.exports = class extends Generator {
     }
 
     // ASK ENVIRONMENT QUESTIONS
-    this.log(`${chalk.cyan("SUPPORTED ENVIRONMENTS:")}`)
+    this.log(`${chalk.cyan("\nSUPPORTED ENVIRONMENTS:")}`)
     this.env_answers = await this.prompt(env_questions);
 
     // ASK TOOLING QUESTIONS
-    this.log(`${chalk.cyan("TOOL INSTALLATION/CONFIGURATION:")}`)
+    this.log(`${chalk.cyan("\nTOOL INSTALLATION/CONFIGURATION:")}`)
     this.tool_answers = await this.prompt(tool_questions);
 
     // ASK TAGGING QUESTIONS
-    this.log(`${chalk.cyan("TAGS:")}`)
+    this.log(`${chalk.cyan("\nTAGS:")}`)
     this.tag_answers = await this.prompt(tag_questions);
 
   }
@@ -254,7 +254,6 @@ module.exports = class extends Generator {
       main_template = "aws-main.tf",
       output_template = "aws-outputs.tf",
       description = "Creates an AWS Backend for a terraform project."
-
     }
 
     // TERRAFORM TEMPLATES
@@ -337,11 +336,7 @@ module.exports = class extends Generator {
         this.destinationPath('parameters/<%= env %>-<%= stack %>.tfvars'),
         { 
           env: env,
-          stack: snakeCase(this.project_answers.stack, options),
-          client: snakeCase(this.tag_answers.client, options),
-          program: snakeCase(this.project_answers.program, options),
-          backend_region: this.cloud_answers2.region,
-          backend_env: env
+          stack: snakeCase(this.project_answers.stack, options)   
         }
       );
 
@@ -372,24 +367,23 @@ module.exports = class extends Generator {
 
   install() {
     if (this.tool_answers.gitflow) {
-      this.log("\n\n")
-      this.log(`${chalk.cyan("INSTALLING GIT FLOW INITIALIZING GIT REPO")}`)
+      this.log(`${chalk.cyan("\n\nINSTALLING GIT FLOW")}`)
       if (os.platform() === "linux" ) { 
         this.log("*** Installing with apt-get ***")
         this.spawnCommandSync("sudo", ["apt-get", "update"])
         this.spawnCommandSync("sudo", ["apt-get", "install", "git-flow"])
       }
-      this.log(`${chalk.cyan("INITIALIZING GIT REPO with GIT FLOW")}`)
+      this.log(`${chalk.cyan("\nINITIALIZING GIT REPO with GIT FLOW")}`)
       this.spawnCommandSync("git", ["flow", "init"])
     } else {
-      this.log(`${chalk.cyan("INITIALIZING GIT REPO")}`)
+      this.log(`${chalk.cyan("\nINITIALIZING GIT REPO")}`)
       this.spawnCommandSync("git", ["init"])      
     }
     this.spawnCommandSync("git", ["add", "."])   
     this.spawnCommandSync("git", ["commit", "-am", "First Commit"])   
     if (this.tool_answers.precommit) {
       this.log("\n\n");
-      this.log(`${chalk.cyan("INSTALLING PRE-COMMIT TOOLS")}`)
+      this.log(`${chalk.cyan("\nINSTALLING PRE-COMMIT TOOLS")}`)
       if (os.platform() === "linux" ) { 
         this.log("*** Installing with apt-get ***")
         this.spawnCommandSync("sudo", ["apt-get", "install", "python3-pip"])
@@ -397,7 +391,7 @@ module.exports = class extends Generator {
       }
       this.spawnCommandSync("pip3", ["install", "pre-commit"])
       this.spawnCommandSync("pip3", ["install", "checkov"])
-      this.log(`${chalk.cyan("RUNNING PRE-COMMIT CHECKS")}`)
+      this.log(`${chalk.cyan("\nRUNNING PRE-COMMIT CHECKS")}`)
       this.spawnCommandSync("pre-commit", ["run", "-a"])
     }
   }
