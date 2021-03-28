@@ -24,8 +24,8 @@ resource "aws_kms_key" "backend_kms_key" {
 }
 
 resource "aws_s3_bucket" "backend_bucket" {
-  #cjc:skip=CKV_AWS_52:Allow bucket without MFA delete enabled for now
-  #cjc:skip=CKV_AWS_18:Allow bucket without access logging enabled for now
+  #checkov:skip=CKV_AWS_52:Allow bucket without MFA delete enabled for now
+  #checkov:skip=CKV_AWS_18:Allow bucket without access logging enabled for now
   bucket = "<%= client %>-<%= program %>-<%= region %>-${var.environment}-envs-tf-backend"
   acl    = "private"
 
