@@ -59,7 +59,7 @@ resource "aws_s3_bucket_public_access_block" "bucket_access" {
 
 resource "aws_dynamodb_table" "state-lock-table" {
   #cjc:skip=CKV_AWS_28:Allow Dynamodb to be created without point in time recovery (backup) enabled
-  name           = "${var.environment}-terraform-state-lock"
+  name           = "<%= client %>-<%= program %>-${var.environment}-terraform-state-lock"
   billing_mode   = "PROVISIONED"
   read_capacity  = 20
   write_capacity = 20
