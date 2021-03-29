@@ -7,7 +7,35 @@
 ## Usage
 
 ```
+LOWER ENV BACKEND CREATON
+
+First, setup backend with local state
+1. cd <your project directory>
+2. terraform init
+3. terraform plan -var-file=./parameters/lower.tfvars –out=lower-plan
+4. terraform apply lower-plan
+
+Then, migrate local statefile to newly created backend
+5. Modify main.tf to support backend state (uncomment the "backend" line in the terraform config section)
 terraform plan && terraform apply
+6. terraform init –backend-config=./backends/lower-backend –backend-config=./backends/lower-<your project name>-backend-key
+
+UPPER ENV BACKEND CREATON
+
+First, setup backend with local state
+1. Modify main.tf to support backend state (COMMENT the "backend" line in the terraform config section)
+2. cd <your project directory> (if necessary)
+3. rm -rf .terraform
+4. terraform init
+5. terraform plan -var-file=./parameters/upper.tfvars –out=upper-plan
+6. terraform apply upper-plan
+
+Then, migrate local statefile to newly created backend
+7. Modify main.tf to support backend state (UNcomment the "backend" line in the terraform config section)
+terraform plan && terraform apply
+8. terraform init –backend-config=./backends/upper-backend –backend-config=./backends/lower-<your project name>-backend-key
+
+
 ```
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
