@@ -6,11 +6,11 @@ This Yeoman generator creates Terraform backend storage (to store terraform remo
 ![Project Image](https://github.com/cchrist1967/generator-cloud-tf-backend-cjc/blob/main/TerraformProjectScaffolding-BackendGenerator.png)
 
 ### Supported Cloud Providers
-- Azure
+#### Azure
 This generator creates templates that build an Azure backend that follows the pattern depicted below
 ![Project Image](https://github.com/cchrist1967/generator-cloud-tf-backend-cjc/blob/main/TerraformProjectScaffolding-AzureBackend.png)
 
-- AWS
+#### AWS
 This generator creates templates that build an AWS backend that follows the pattern depicted below
 ![Project Image](https://github.com/cchrist1967/generator-cloud-tf-backend-cjc/blob/main/TerraformProjectScaffolding-AWSBackend.png)
 ### Actions taken by the generator
