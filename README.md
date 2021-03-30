@@ -3,12 +3,16 @@
 
 This Yeoman generator creates Terraform backend storage (to store terraform remote state)
 
-![Project Image](https://github.com/cchrist1967/generator-cloud-tf-backend-cjc/blob/main/TerraformProjectScaffolding-Backend.png)
+![Project Image](https://github.com/cchrist1967/generator-cloud-tf-backend-cjc/blob/main/TerraformProjectScaffolding-BackendGenerator.png)
 
 ### Supported Cloud Providers
 - Azure
-- AWS
+This generator creates templates that build an Azure backend that follows the pattern depicted below
+![Project Image](https://github.com/cchrist1967/generator-cloud-tf-backend-cjc/blob/main/TerraformProjectScaffolding-AzureBackend.png)
 
+- AWS
+This generator creates templates that build an AWS backend that follows the pattern depicted below
+![Project Image](https://github.com/cchrist1967/generator-cloud-tf-backend-cjc/blob/main/TerraformProjectScaffolding-AWSBackend.png)
 ### Actions taken by the generator
 
 #### Prompting
@@ -71,6 +75,7 @@ backend_project
 <li> cd your_terraform_backend_project_directory
 <li> npm install -g generator-cloud-tf-backend-cjc
 <li> yo cloud-tf-backend-cjc
+<li> See generated README for instructions on use of the generated templates
 </ol>
 
 ## Development
